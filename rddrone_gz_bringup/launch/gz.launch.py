@@ -86,7 +86,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource([PathJoinSubstitution(
             [get_package_share_directory('ros_gz_sim'), 'launch', 'gz_sim.launch.py'])]),
         launch_arguments=[('gz_args', [
-            LaunchConfiguration('world'), '.sdf', ' -v 0', ' -r'
+            LaunchConfiguration('world'), '.sdf', ' -v 4', ' -r'
             ])]
     )
 
@@ -221,6 +221,13 @@ def generate_launch_description():
             ('/odom', '/cerebri/in/odometry')
             ])
 
+    static_tf = Node(
+        package = "tf2_ros", 
+        executable = "static_transform_publisher",
+        arguments = [
+            '--frame-id','map',
+            '--child-frame-id','odom'])
+
     # Define LaunchDescription variable
     return LaunchDescription(ARGUMENTS + [
         robot_description,
@@ -236,5 +243,6 @@ def generate_launch_description():
         rviz2,
         spawn_robot,
         corti,
-        tf_to_odom
+        tf_to_odom,
+        static_tf
     ])
