@@ -158,6 +158,161 @@
           </friction>
         </surface>
       </collision>
+    </link>
+    <link name="camera_link">
+      <pose>.14 0 .02 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.01</mass>
+        <inertia>
+          <ixx>0.00000130666</ixx> <!-- (.01/12)*(.028^2+.028^2) -->
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00000130666</iyy> <!-- (.01/12)*(.028^2+.028^2) -->
+          <iyz>0</iyz>
+          <izz>0.00000130666</izz> <!-- (.01/12)*(.028^2+.028^2) -->
+        </inertia>
+      </inertial>
+      <visual name="camera_housing">
+        <pose>.013 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.008 .028 .028</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <specular>1.0 1.0 1.0</specular>
+        </material>
+      </visual>
+      <visual name="camera_housing_mount">
+        <pose>.008 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>.008 .014 .01</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <specular>1.0 1.0 1.0</specular>
+        </material>
+      </visual>
+      <visual name="camera_lens">
+        <pose>.016 0 .006 0 1.57079632679 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.003</length>
+            <radius>0.004</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+      <sensor name="ov5645" type="camera">
+        <pose>.016 0 .006 0 0 0</pose>
+        <camera>
+          <image>
+            <width>320</width>
+            <height>240</height>
+            <format>B8G8R8</format>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>100</far>
+          </clip>
+          <optical_frame_id>camera_link_optical</optical_frame_id>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+        <topic>/camera/image_raw</topic>
+      </sensor>
+    </link>
+    <link name="lidar_link">
+      <pose>0 0 .083 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.17</mass>
+        <inertia>
+          <ixx>0.0001926666667</ixx> <!-- (.17/12)*(.1^2+.06^2) -->
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0001224141667</iyy> <!-- (.17/12)*(.071^2+.06^2) -->
+          <iyz>0</iyz>
+          <izz>0.0002130808333</izz> <!-- (.17/12)*(.071^2+.1^2) -->
+        </inertia>
+      </inertial>
+      <visual name="visual_box">
+        <pose>0 0 -.017 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.039 0.039 0.022</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.01 0.01 0.01</diffuse>
+          <specular>0.01 0.01 0.01</specular>
+        </material>
+      </visual>
+      <visual name="visual_cylinder">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.018</radius>
+            <length>0.014</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <diffuse>0.01 0.01 0.01</diffuse>
+          <specular>0.01 0.01 0.01</specular>
+        </material>
+      </visual>
+      <sensor name="lidar" type="gpu_lidar">
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>360</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.14159265359</min_angle>
+              <max_angle>3.14159265359</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.15</min>
+            <max>10</max>
+            <resolution>0.01</resolution>
+          </range>
+        </lidar>
+        <gz_frame_id>lidar_link</gz_frame_id>
+        <alwaysOn>1</alwaysOn>
+        <visualize>false</visualize>
+        <update_rate>10</update_rate>
+      </sensor>
+    </link>
+    <link name="sensors">
+      <pose>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.0000001</mass>
+        <inertia>
+          <ixx>0.000000000001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000000000001</iyy>
+          <iyz>0</iyz>
+          <izz>0.000000000001</izz>
+        </inertia>
+      </inertial>
+      <sensor name="imu_sensor" type="imu">
+        <always_on>1</always_on>
+        <update_rate>250</update_rate>
+      </sensor>
+      <sensor name="mag_sensor" type="magnetometer">
+        <always_on>1</always_on>
+        <update_rate>50</update_rate>
+      </sensor>
+      <sensor name="altimeter_sensor" type="altimeter">
+        <always_on>1</always_on>
+        <update_rate>50</update_rate>
+      </sensor>
       <sensor name="air_pressure_sensor" type="air_pressure">
         <always_on>1</always_on>
         <update_rate>50</update_rate>
@@ -170,9 +325,13 @@
           </pressure>
         </air_pressure>
       </sensor>
-      <sensor name="imu_sensor" type="imu">
+      <sensor name="navsat_sensor" type="navsat">
         <always_on>1</always_on>
-        <update_rate>250</update_rate>
+        <update_rate>10</update_rate>
+        <navsat>
+          <position_sensing></position_sensing>
+          <velocity_sensing></velocity_sensing>
+        </navsat>
       </sensor>
     </link>
     <link name="rotor_0">
@@ -463,7 +622,20 @@
         </dynamics>
       </axis>
     </joint>
-   <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+    <joint name="SensorsJoint" type="fixed">
+      <parent>base_link</parent>
+      <child>sensors</child>
+      <pose>0.0 0.0 0.0 0 0 0</pose>
+    </joint>
+    <joint name="lidar_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>lidar_link</child>
+    </joint>
+    <joint name="camera_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>camera_link</child>
+    </joint>
+    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_0_joint</jointName>
       <linkName>rotor_0</linkName>
       <robotNamespace/>
@@ -531,10 +703,11 @@
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
-    <!-- <plugin
+    <plugin
       filename="gz-sim-linearbatteryplugin-system"
       name="gz::sim::systems::LinearBatteryPlugin">
       <battery_name>linear_battery</battery_name>
+      <voltage>12.6</voltage>
       <open_circuit_voltage_constant_coef>12.6</open_circuit_voltage_constant_coef>
       <open_circuit_voltage_linear_coef>-3.0</open_circuit_voltage_linear_coef>
       <initial_charge>4.8</initial_charge>
@@ -545,6 +718,6 @@
       <power_load>48.0</power_load>
       <fix_issue_225>true</fix_issue_225>
       <start_draining>true</start_draining>
-    </plugin> -->
+    </plugin>
   </model>
 </sdf>
