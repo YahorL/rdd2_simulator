@@ -158,6 +158,86 @@
           </friction>
         </surface>
       </collision>
+      <collision name="rotor_0_collision">
+        <pose>0.174 -0.174 0.06 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.14</radius>
+            <length>0.001</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+              <max_vel>0</max_vel>
+            </ode>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name="rotor_1_collision">
+        <pose>-0.174 0.174 0.06 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.14</radius>
+            <length>0.001</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+              <max_vel>0</max_vel>
+            </ode>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name="rotor_2_collision">
+        <pose>0.174 0.174 0.06 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.14</radius>
+            <length>0.001</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+              <max_vel>0</max_vel>
+            </ode>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name="rotor_3_collision">
+        <pose>-0.174 -0.174 0.06 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.14</radius>
+            <length>0.001</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+              <max_vel>0</max_vel>
+            </ode>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
     </link>
     <link name="camera_link">
       <pose>.14 0 .02 0 0 0</pose>
@@ -226,6 +306,22 @@
         <topic>/camera/image_raw</topic>
       </sensor>
     </link>
+    <link name="mass_balance_link">
+      <pose>-.14 0 .02 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.01</mass>
+        <inertia>
+          <ixx>0.00000130666</ixx> <!-- (.01/12)*(.028^2+.028^2) -->
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00000130666</iyy> <!-- (.01/12)*(.028^2+.028^2) -->
+          <iyz>0</iyz>
+          <izz>0.00000130666</izz> <!-- (.01/12)*(.028^2+.028^2) -->
+        </inertia>
+      </inertial>
+    </link>
+
     <link name="lidar_link">
       <pose>0 0 .083 0 0 0</pose>
       <inertial>
@@ -371,25 +467,6 @@
           </mesh>
         </geometry>
       </visual>
-      <collision name="rotor_0_collision">
-        <pose>0 0 0 0 0 0 </pose>
-        <geometry>
-          <box>
-            <size>0.2792307692307692 0.016923076923076923 0.0008461538461538462</size>
-          </box>
-        </geometry>
-        <surface>
-          <contact>
-            <ode>
-              <min_depth>0.001</min_depth>
-              <max_vel>0</max_vel>
-            </ode>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
     </link>
     <joint name="rotor_0_joint" type="revolute">
       <parent>base_link</parent>
@@ -443,25 +520,6 @@
           </mesh>
         </geometry>
       </visual>
-      <collision name="rotor_1_collision">
-        <pose>0 0 0 0 0 0 </pose>
-        <geometry>
-          <box>
-            <size>0.2792307692307692 0.016923076923076923 0.0008461538461538462</size>
-          </box>
-        </geometry>
-        <surface>
-          <contact>
-            <ode>
-              <min_depth>0.001</min_depth>
-              <max_vel>0</max_vel>
-            </ode>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
     </link>
     <joint name="rotor_1_joint" type="revolute">
       <parent>base_link</parent>
@@ -515,25 +573,6 @@
           </mesh>
         </geometry>
       </visual>
-      <collision name="rotor_2_collision">
-        <pose>0 0 0 0 0 0 </pose>
-        <geometry>
-          <box>
-            <size>0.2792307692307692 0.016923076923076923 0.0008461538461538462</size>
-          </box>
-        </geometry>
-        <surface>
-          <contact>
-            <ode>
-              <min_depth>0.001</min_depth>
-              <max_vel>0</max_vel>
-            </ode>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
     </link>
     <joint name="rotor_2_joint" type="revolute">
       <parent>base_link</parent>
@@ -587,25 +626,6 @@
           </mesh>
         </geometry>
       </visual>
-      <collision name="rotor_3_collision">
-        <pose>0 0 0 0 0 0 </pose>
-        <geometry>
-          <box>
-            <size>0.2792307692307692 0.016923076923076923 0.0008461538461538462</size>
-          </box>
-        </geometry>
-        <surface>
-          <contact>
-            <ode>
-              <min_depth>0.001</min_depth>
-              <max_vel>0</max_vel>
-            </ode>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
     </link>
     <joint name="rotor_3_joint" type="revolute">
       <parent>base_link</parent>
@@ -718,6 +738,17 @@
       <power_load>48.0</power_load>
       <fix_issue_225>true</fix_issue_225>
       <start_draining>true</start_draining>
+    </plugin>
+    <plugin
+      filename="gz-sim-odometry-publisher-system"
+      name="gz::sim::systems::OdometryPublisher">
+      <xyz_offset>0 0 0</xyz_offset>
+      <rpy_offset>0 0 0</rpy_offset>
+      <gaussian_noise>0</gaussian_noise>
+      <robot_base_frame>base_link</robot_base_frame>
+      <dimensions>3</dimensions>
+      <odom_publish_frequency>30</odom_publish_frequency>
+      <odom_frame>odom</odom_frame>
     </plugin>
   </model>
 </sdf>
