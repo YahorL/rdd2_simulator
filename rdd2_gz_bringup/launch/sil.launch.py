@@ -82,7 +82,7 @@ def generate_launch_description():
             [get_package_share_directory('synapse_gz'), 'launch', 'synapse_gz.launch.py'])]),
         condition=IfCondition(LaunchConfiguration('synapse_gz')),
         launch_arguments=[('host', ['127.0.0.1']),
-                          ('port', '4241'),
+                          ('port', '4243'),
                           ('vehicle', 'rdd2'),
                           ('use_sim_time', LaunchConfiguration('use_sim_time'))]
     )
