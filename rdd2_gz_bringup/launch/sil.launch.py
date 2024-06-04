@@ -19,6 +19,9 @@ ARGUMENTS = [
         description='z position'),
     DeclareLaunchArgument('yaw', default_value=['0'],
         description='yaw position'),
+    DeclareLaunchArgument('electrode', default_value='false',
+        choices=['true', 'false'],
+        description='enable electrode'),
     DeclareLaunchArgument('sync', default_value='false',
                           choices=['true', 'false'],
                           description='Run async or sync SLAM'),
@@ -224,6 +227,19 @@ def generate_launch_description():
             ('/odom', '/cerebri/out/odometry')
             ])
 
+    electrode = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([PathJoinSubstitution(
+            [get_package_share_directory('electrode'), 'launch', 'electrode.launch.py'])]),
+        condition=IfCondition(LaunchConfiguration('electrode')),
+        launch_arguments=[('rviz2', 'true'),
+                          ('foxglove', 'false'),
+                          ('vehicle', 'rdd2'),
+                          ('sim', LaunchConfiguration('use_sim_time')),
+                          ('joy', 'true'),
+                        ]
+    )
+
+
     # Define LaunchDescription variable
     return LaunchDescription(ARGUMENTS + [
         robot_description,
@@ -241,4 +257,5 @@ def generate_launch_description():
         slam,
         localization,
         odom_to_tf,
+        electrode
     ])
