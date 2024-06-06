@@ -216,7 +216,6 @@ def generate_launch_description():
                 'rdd2_nav2'), 'maps', LaunchConfiguration('map_yaml')]))])
 
     odom_to_tf = Node(
-        condition=IfCondition(LaunchConfiguration('corti')),
         package='corti',
         executable='odom_to_tf',
         output='screen',
@@ -226,6 +225,13 @@ def generate_launch_description():
         remappings=[
             ('/odom', '/cerebri/out/odometry')
             ])
+
+    static_map_to_odom = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        condition=LaunchConfigurationEquals('localization', 'off'),
+        output='screen',
+        arguments=['--child-frame-id', 'odom', '--frame-id', 'map'])
 
     electrode = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([PathJoinSubstitution(
@@ -257,5 +263,6 @@ def generate_launch_description():
         slam,
         localization,
         odom_to_tf,
+        static_map_to_odom,
         electrode
     ])
