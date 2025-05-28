@@ -122,6 +122,19 @@ def generate_launch_description():
         arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
     )
 
+    odom_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        name='bridge_gz_ros_odom',
+        output='screen',
+        condition=IfCondition(LaunchConfiguration('bridge')),
+        parameters=[{
+            'use_sim_time': LaunchConfiguration('use_sim_time')
+            }],
+        arguments=['/model/rdd2/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry'],
+        remappings=[('/model/rdd2/odometry','/odom')
+        ])
+
     lidar_bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
@@ -259,6 +272,7 @@ def generate_launch_description():
         gz_sim,
         cerebri,
         clock_bridge,
+        odom_bridge,
         camera_bridge,
         camera_info_bridge,
         lidar_bridge,
