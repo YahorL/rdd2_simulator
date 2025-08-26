@@ -404,40 +404,34 @@
           <angular_velocity>
             <x>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.0002</stddev>
+                <stddev>0.000201</stddev>
               </noise>
             </x>
             <y>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.0002</stddev>
+                <stddev>0.000344</stddev>
               </noise>
             </y>
             <z>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.0002</stddev>
+                <stddev>0.000531</stddev>
               </noise>
             </z>
           </angular_velocity>
           <linear_acceleration>
             <x>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.017</stddev>
+                <stddev>0.004287</stddev>
               </noise>
             </x>
             <y>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.017</stddev>
+                <stddev>0.003705</stddev>
               </noise>
             </y>
             <z>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.017</stddev>
+                <stddev>0.005271</stddev>
               </noise>
             </z>
           </linear_acceleration>
@@ -449,20 +443,14 @@
         <magnetometer>
           <x>
             <noise type="gaussian">
-              <mean>0</mean>
-              <stddev>0.0000015</stddev>
             </noise>
           </x>
           <y>
             <noise type="gaussian">
-              <mean>0</mean>
-              <stddev>0.0000015</stddev>
             </noise>
           </y>
           <z>
             <noise type="gaussian">
-              <mean>0</mean>
-              <stddev>0.0000015</stddev>
             </noise>
           </z>
         </magnetometer>
@@ -473,14 +461,10 @@
         <altimeter>
           <vertical_position>
             <noise type="gaussian">
-              <mean>0</mean>
-              <stddev>0.1</stddev>
             </noise>
           </vertical_position>
           <vertical_velocity>
             <noise type="gaussian">
-              <mean>0</mean>
-              <stddev>0.1</stddev>
             </noise>
           </vertical_velocity>
         </altimeter>
@@ -491,8 +475,6 @@
         <air_pressure>
           <pressure>
             <noise type="gaussian">
-              <mean>0</mean>
-              <stddev>0.01</stddev>
             </noise>
           </pressure>
         </air_pressure>
