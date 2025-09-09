@@ -400,14 +400,74 @@
       <sensor name="imu_sensor" type="imu">
         <always_on>1</always_on>
         <update_rate>250</update_rate>
+        <imu>
+          <angular_velocity>
+            <x>
+              <noise type="gaussian">
+                <stddev>0.000201</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <stddev>0.000344</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <stddev>0.000531</stddev>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x>
+              <noise type="gaussian">
+                <stddev>0.004287</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <stddev>0.003705</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <stddev>0.005271</stddev>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
       </sensor>
       <sensor name="mag_sensor" type="magnetometer">
         <always_on>1</always_on>
         <update_rate>50</update_rate>
+        <magnetometer>
+          <x>
+            <noise type="gaussian">
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+            </noise>
+          </z>
+        </magnetometer>
       </sensor>
       <sensor name="altimeter_sensor" type="altimeter">
         <always_on>1</always_on>
         <update_rate>50</update_rate>
+        <altimeter>
+          <vertical_position>
+            <noise type="gaussian">
+            </noise>
+          </vertical_position>
+          <vertical_velocity>
+            <noise type="gaussian">
+            </noise>
+          </vertical_velocity>
+        </altimeter>
       </sensor>
       <sensor name="air_pressure_sensor" type="air_pressure">
         <always_on>1</always_on>
@@ -415,8 +475,6 @@
         <air_pressure>
           <pressure>
             <noise type="gaussian">
-              <mean>0</mean>
-              <stddev>0.01</stddev>
             </noise>
           </pressure>
         </air_pressure>

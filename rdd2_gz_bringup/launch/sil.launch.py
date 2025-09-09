@@ -122,6 +122,43 @@ def generate_launch_description():
         arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
     )
 
+    odom_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        name='bridge_gz_ros_odom',
+        output='screen',
+        condition=IfCondition(LaunchConfiguration('bridge')),
+        parameters=[{
+            'use_sim_time': LaunchConfiguration('use_sim_time')
+            }],
+        arguments=['/model/rdd2/odometry@nav_msgs/msg/Odometry[gz.msgs.Odometry'],
+        remappings=[('/model/rdd2/odometry','/odom')]
+    )
+    
+    imu_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        name='bridge_gz_ros_imu',
+        output='screen',
+        condition=IfCondition(LaunchConfiguration('bridge')),
+        parameters=[{
+            'use_sim_time': LaunchConfiguration('use_sim_time')
+            }],
+        arguments=['/world/default/model/rdd2/link/sensors/sensor/imu_sensor/imu@sensor_msgs/msg/Imu[gz.msgs.IMU'],
+        remappings=[('/world/default/model/rdd2/link/sensors/sensor/imu_sensor/imu','/imu')])
+    
+    mag_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        name='bridge_gz_ros_mag',
+        output='screen',
+        condition=IfCondition(LaunchConfiguration('bridge')),
+        parameters=[{
+            'use_sim_time': LaunchConfiguration('use_sim_time')
+            }],
+        arguments=['/world/default/model/rdd2/link/sensors/sensor/mag_sensor/magnetometer@sensor_msgs/msg/MagneticField[gz.msgs.Magnetometer'],
+        remappings=[('/world/default/model/rdd2/link/sensors/sensor/mag_sensor/magnetometer','/mag')])
+
     lidar_bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
@@ -259,6 +296,9 @@ def generate_launch_description():
         gz_sim,
         cerebri,
         clock_bridge,
+        odom_bridge,
+        imu_bridge,
+        mag_bridge,
         camera_bridge,
         camera_info_bridge,
         lidar_bridge,
