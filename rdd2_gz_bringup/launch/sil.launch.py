@@ -81,6 +81,7 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('synapse_ros')),
         launch_arguments=[('host', ['192.0.2.1']),
                           ('port', '4242'),
+                          ('port_srv', '4242'),
                           ('use_sim_time', LaunchConfiguration('use_sim_time'))]
     )
 
@@ -90,6 +91,7 @@ def generate_launch_description():
         condition=IfCondition(LaunchConfiguration('synapse_gz')),
         launch_arguments=[('host', ['127.0.0.1']),
                           ('port', '4243'),
+                          ('port_srv', '4241'),
                           ('vehicle', 'rdd2'),
                           ('use_sim_time', LaunchConfiguration('use_sim_time'))]
     )
